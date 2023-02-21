@@ -2,8 +2,10 @@
   <div class="container">
     <!-- menu -->
     <BGVue class="bg" />
-    <div class="logo" @click="showMenu" ref="logo">
-      <LottieView :path="path" />
+    <FunnelView class="logo" @click="showMenu" ref="logo" />
+
+    <div>
+      <!-- <LottieView :path="path" /> -->
     </div>
     <Scene1 class="scene" ref="sceneRef" />
   </div>
@@ -14,98 +16,97 @@ import { ref } from 'vue'
 import LottieView from '@/components/LottieView'
 import anime from 'animejs'
 import BGVue from './BG.vue'
+// import FunnelView from './FunnelView.vue'
+import FunnelView from './FunnelView2.vue'
+
 import Scene1 from './scene/Scene1.vue'
 
 const path = 'https://assets3.lottiefiles.com/packages/lf20_3QnWBywaTr.json'
 const logo = ref(null)
 const sceneRef = ref(null)
+const showFunnel = ref(true)
+
+const removeAnimation = (animation) => {
+  animation.remove('.logo .bg .scene')
+}
 const showMenu = () => {
-  console.log('2222')
+  showFunnel.value = !showFunnel.value
+  const show = showFunnel.value
+  if (show) {
+    //显示脱落
 
-  logo.value.style.position = 'relative'
-  console.log(' sceneRef.value', sceneRef.value)
-  console.log(' sceneRef', sceneRef)
+    anime
+      .timeline({
+        easing: 'easeOutQuad',
+        duration: 500,
+        complete: function (anim) {
+          // logo.value.style.left = 'calc(50% - 200px)'
+          removeAnimation(anim)
+        }
+      })
 
-  // sceneRef.value.style.transform = 'scale(0.1)'
-  // sceneRef.value.style.opacity = 0.1
-  // screenRef.value.style.transform = `scale(${scale.width}, ${scale.height})`;
+      .add({
+        targets: '.logo',
+        left: 'calc(50% - 200px)',
+        duration: 500
+      })
+      .add(
+        {
+          targets: '.bg',
+          rotate: 0,
+          scale: 1
+        },
+        '-=500'
+      )
+      .add(
+        {
+          targets: '.scene',
+          scale: 1,
+          opacity: '0',
+          translateX: '100%',
+          duration: 1350
+        },
+        '-=300'
+      )
+  } else {
+    // logo.value.style.position = 'relative'
 
-  var tl = anime
-    .timeline({
-      easing: 'easeOutQuad',
-      duration: 500
-    })
-    .add({
-      targets: '.logo',
-      left: 0,
-      top: 200,
-      width: 100,
-      height: 100,
-      borderRadius: '50%'
-    })
-    .add(
-      {
-        targets: '.bg',
-        rotate: 45,
-        scale: 2
-      },
-      '-=500'
-    )
-    .add(
-      {
-        targets: '.scene',
-        scale: 1,
-        opacity: 1,
-        translateX: 0,
-        duration: 1350
-      },
-      '+=1500'
-    )
+    anime
+      .timeline({
+        easing: 'easeInQuad',
+        duration: 500,
+        complete: function (anim) {
+          // logo.value.style.left = '0'
 
-  sceneRef.value.showCharts()
+          removeAnimation(anim)
+        }
+      })
+      .add({
+        targets: '.logo',
+        left: 0,
+        duration: 500
+      })
+      .add(
+        {
+          targets: '.bg',
+          rotate: 45,
+          scale: 2
+        },
+        '-=500'
+      )
+      .add(
+        {
+          targets: '.scene',
+          scale: 1,
+          opacity: 1,
+          translateX: 0,
+          duration: 1350
+        },
+        '-=300'
+      )
 
-  // tl.add
-
-  // .add(
-  //   {
-  //     targets: '.logo',
-  //     width: 100,
-  //     height: 100
-  //     // rotate: {
-  //     //   value: 360,
-  //     //   duration: 400,
-  //     //   easing: 'easeOutQuad'
-  //     // }
-  //   },
-  //   '-=400'
-  // )
-
-  anime({
-    targets: '.morphing-demo .polymorph',
-    points: [
-      {
-        value: [
-          '70 24 119.574 60.369 100.145 117.631 50.855 101.631 3.426 54.369',
-          '70 41 118.574 59.369 111.145 132.631 60.855 84.631 20.426 60.369'
-        ]
-      },
-      {
-        value:
-          '70 6 119.574 60.369 100.145 117.631 39.855 117.631 55.426 68.369'
-      },
-      {
-        value:
-          '70 57 136.574 54.369 89.145 100.631 28.855 132.631 38.426 64.369'
-      },
-      {
-        value:
-          '70 24 119.574 60.369 100.145 117.631 50.855 101.631 3.426 54.369'
-      }
-    ],
-    easing: 'easeOutQuad',
-    duration: 2000,
-    loop: true
-  })
+    sceneRef.value.showCharts()
+  }
 
   // = {
   //   position: 'relative',
@@ -128,20 +129,19 @@ const showMenu = () => {
     background-color: burlywood;
   }
 }
-:root {
-  --itemWidth: 400px;
-}
+
 .bg {
   position: fixed;
   width: 100%;
   height: 100%;
 }
 .logo {
+  --itemWidth: 400px;
   position: absolute;
   left: calc(50% - 200px);
   top: calc(50% - 200px);
-  // width: var(--itemWidth);
-  // height: var(--itemWidth);
+  width: var(--itemWidth);
+  height: var(--itemWidth);
   background-color: transparent;
   overflow: hidden;
   z-index: 10000000;
@@ -167,7 +167,7 @@ const showMenu = () => {
   width: calc(100% - 200px);
   background-color: antiquewhite;
 
-  transition: all 0.25s ease-in-out;
+  // transition: all 0.25s ease-in-out;
   transform: translateX(100%);
 }
 </style>

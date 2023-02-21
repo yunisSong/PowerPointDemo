@@ -1,12 +1,17 @@
 <template>
   <div class="bg">
-    <div class="one flex1"></div>
+    <template v-for="i in itemsCount">
+      <div class="one flex1"></div>
+    </template>
+    <!-- <div class="one flex1"></div>
     <div class="two flex1"></div>
-    <div class="three flex1"></div>
+    <div class="three flex1"></div> -->
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const itemsCount = 10
+</script>
 
 <style lang="scss" scoped>
 .bg {
@@ -19,6 +24,9 @@
 }
 .one {
   background-color: #9dc8c8;
+}
+.one:nth-child(2n) {
+  background-color: #58c9b9;
 }
 .two {
   background-color: #58c9b9;
