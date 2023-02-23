@@ -73,10 +73,17 @@ const option = {
   ]
 }
 
+const emits = defineEmits(['showTags'])
+
 const showCharts = () => {
   const myChart = echarts.init(charts.value)
   myChart.setOption(option)
+  myChart.on('click', (params) => {
+    console.log('params', params)
+    emits('showTags', params.name)
+  })
 }
+
 onMounted(() => {
   showCharts()
 })
@@ -88,8 +95,11 @@ defineExpose({
 
 <style lang="scss" scoped>
 .box {
-  width: 100%;
-  height: 100%;
+  --width: 400px;
+  // width: 100%;
+  // height: 100%;
+  width: var(--width);
+  height: var(--width);
   background-color: transparent;
 }
 .charts {

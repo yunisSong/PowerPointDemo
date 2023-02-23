@@ -116,10 +116,15 @@ const option = {
     }
   ]
 }
+const emits = defineEmits(['showTags'])
 
 const showCharts = () => {
   const myChart = echarts.init(charts.value)
   myChart.setOption(option)
+  myChart.on('click', (params) => {
+    console.log('params', params)
+    emits('showTags', params.name)
+  })
 }
 onMounted(() => {
   showCharts()
