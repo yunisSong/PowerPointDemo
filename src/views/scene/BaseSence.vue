@@ -2,7 +2,7 @@
   <div class="baseSence" @click="show">
     <!-- <BGVue class="bg" /> -->
     <!-- <LottieView class="bg" :path="path" :animationData="animationData" /> -->
-
+    <button class="backButton" @click="back">返回</button>
     <div class="gif">
       <LottieView :path="path" :animationData="animationData" />
     </div>
@@ -143,6 +143,11 @@ watch(title, (newValue, oldValue) => {
   hidden()
   show()
 })
+const emits = defineEmits(['showMenus'])
+
+const back = () => {
+  emits('showMenus', {})
+}
 </script>
 
 <style lang="scss" scoped>
@@ -154,6 +159,15 @@ watch(title, (newValue, oldValue) => {
   align-items: center;
   justify-content: center;
 }
+.backButton {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background-color: #d1b6e1;
+  color: #222;
+  width: 60px;
+  height: 30px;
+}
 .bg {
   position: fixed;
   width: 100%;
@@ -161,6 +175,7 @@ watch(title, (newValue, oldValue) => {
 }
 .gif {
   width: 300px;
+  margin-top: 25px;
 }
 .description {
   flex: 1;

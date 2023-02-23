@@ -20,6 +20,7 @@
       :animationData="animationData"
       :title="title"
       :content="content"
+      @showMenus="showMenu"
     />
   </div>
 </template>
