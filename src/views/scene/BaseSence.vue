@@ -163,11 +163,24 @@ const back = () => {
   position: absolute;
   right: 20px;
   top: 20px;
-  background-color: #d1b6e1;
-  color: #222;
+  background-color: #58c9b9;
+  color: #fff;
   width: 60px;
-  height: 30px;
+  height: 36px;
+  border: none;
+  font-size: 16px;
+  border-radius: 4px;
 }
+/*
+
+
+#9DC8C8
+#58C9B9
+#519D9E
+#D1B6E1
+
+
+*/
 .bg {
   position: fixed;
   width: 100%;

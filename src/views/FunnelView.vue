@@ -13,10 +13,10 @@ const option = {
   title: {
     text: ''
   },
-  tooltip: {
-    trigger: 'item',
-    formatter: '{a} <br/>{b} : {c}%'
-  },
+  // tooltip: {
+  //   trigger: 'item',
+  //   formatter: '{a} <br/>{b} : {c}%'
+  // },
   // toolbox: {
   //   feature: {
   //     dataView: { readOnly: false },
@@ -43,6 +43,7 @@ const option = {
       gap: 2,
       label: {
         show: true,
+        fontSize: 16,
         position: 'inside'
       },
       labelLine: {
@@ -58,7 +59,7 @@ const option = {
       },
       emphasis: {
         label: {
-          fontSize: 20
+          fontSize: 18
         }
       },
       data: [

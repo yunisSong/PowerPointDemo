@@ -4,7 +4,7 @@
     <BGVue class="bg" />
     <!--       @click="showMenu"
  -->
-    <div class="logo">
+    <div class="logo" ref="logo3D">
       <FunnelBG class="svgbg" />
 
       <FunnelView class="logoItem" ref="logo" @showTags="showTags" />
@@ -26,9 +26,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import LottieView from '@/components/LottieView'
 import anime from 'animejs'
+import VanillaTilt from 'vanilla-tilt'
 import BGVue from './BG.vue'
 import FunnelView from './FunnelView.vue'
 import FunnelBG from './FunnelBG.vue'
@@ -57,6 +58,8 @@ const title = ref('测试标题')
 const content =
   '这段文字是这个标题以及动效的描述，这段文字是这个标题以及动效的描述，这段文字是这个标题以及动效的描述，这段文字是这个标题以及动效的描述，这段文字是这个标题以及动效的描述，这段文字是这个标题以及动效的描述，'
 const logo = ref(null)
+const logo3D = ref(null)
+
 const sceneRef = ref(null)
 const showFunnel = ref(true)
 
@@ -183,6 +186,15 @@ const showTags = (tag) => {
     showMenu()
   }
 }
+
+onMounted(() => {
+  console.log('logo3D', logo3D.value)
+  VanillaTilt.init(logo3D.value, {
+    max: 25,
+    speed: 400
+    // glare: true
+  })
+})
 </script>
 
 <style lang="scss" scoped>
