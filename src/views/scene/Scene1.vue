@@ -16,15 +16,15 @@
 import { ref, onMounted } from 'vue'
 import * as echarts from 'echarts'
 const charts = ref(null)
-const colors = ['#5470C6', '#EE6666']
+const colors = ['#5470C6', '#EE6666', '#9DC8C8']
 const option = {
   color: colors,
-  // tooltip: {
-  //   trigger: 'none',
-  //   axisPointer: {
-  //     type: 'cross'
-  //   }
-  // },
+  tooltip: {
+    trigger: 'item',
+    axisPointer: {
+      type: 'cross'
+    }
+  },
   legend: {},
   grid: {
     top: 70,
@@ -91,18 +91,42 @@ const option = {
     {
       name: '事故代价',
       data: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-      type: 'line'
+      type: 'line',
+      tooltip: {
+        trigger: 'item',
+        show: false
+      }
     },
     {
       name: '成本控制',
       data: [100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0],
-      type: 'line'
+      type: 'line',
+      tooltip: {
+        trigger: 'item',
+        show: false
+      }
     },
     {
       name: '最优解',
       data: [100, 95, 85, 75, 65, 60, 65, 75, 85, 95, 100],
       type: 'line',
-      smooth: true
+      smooth: true,
+      tooltip: {
+        trigger: 'item',
+        show: false
+      }
+    },
+    {
+      symbolSize: 40,
+      data: [[5.0, 55]],
+      type: 'scatter',
+      tooltip: {
+        textStyle: {
+          fontSize: '16',
+          color: '#222'
+        },
+        formatter: '最优成本'
+      }
     }
   ]
 }

@@ -46,6 +46,7 @@ import animationData_10 from '@/assets/control.json' // 导出的动效json文�
 import animationData_11 from '@/assets/delivery.json' // 导出的动效json文件
 import animationData_12 from '@/assets/project.json' // 导出的动效json文件
 import animationData_13 from '@/assets/transaction.json' // 导出的动效json文件
+import animationData_14 from '@/assets/loop.json' // 导出的动效json文件
 
 // import FunnelView from './FunnelView2.vue'
 
@@ -142,7 +143,7 @@ const showMenu = () => {
         '-=300'
       )
 
-    // sceneRef.value.showCharts()
+    sceneRef.value.showCharts()
   }
 
   // = {
@@ -171,7 +172,9 @@ const changeData = (name) => {
       animationData.value = animationData_9
       break
     case '项目':
-      animationData.value = animationData_12
+      // animationData_14
+      // animationData_12
+      animationData.value = animationData_14
       break
 
     default:
